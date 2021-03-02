@@ -25,3 +25,13 @@
 
 - Sistema desenvolvido em Angular 10
 - Gerenciamento de Estados: Redux (ngrx)
+
+
+# Dockerfile Kafka
+
+- Arquivo se encontra em docker-kafka
+
+
+# docker-compose PostgreSQL
+
+- Arquivo se encontra em docker-postgres
