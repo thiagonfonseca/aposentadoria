@@ -1,0 +1,52 @@
+  <form [formGroup]="form" novalidate class="form-container">
+    <div style="display: inline-block;">
+      <mat-form-field style="width: 30%; margin-right: 10px">
+        <input matInput placeholder="CPF (Somente números)" formControlName="cpf">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="getCaixaByCpf();" name="action" style="margin-right: 10px">
+        <mat-icon>search</mat-icon> Pesquisar
+      </button>
+    </div>  
+    <mat-form-field style="width: 30%; margin-right: 10px">
+      <input matInput placeholder="Aporte" formControlName="aporte" type="number" step="0.01">
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="primary" [disabled]="!validateForm" (click)="saveCaixa()" type="button" name="action" style="margin-right: 10px">
+        <mat-icon>save</mat-icon> Cadastrar
+      </button>
+      <button mat-raised-button color="primary" name="limpar" type="button" (click)="cancel()">
+        <mat-icon>delete</mat-icon> Limpar
+      </button>
+    </div>
+    <mat-form-field style="width: 30%; margin-top: 20px; margin-right: 10px">
+      <input matInput placeholder="Resultado" formControlName="resultado" type="number">
+    </mat-form-field>
+    <div style="width: 30%">
+      <button mat-raised-button color="primary" [disabled]="!validateForm" name="calcular" (click)="calculaAposentadoriaByCpf()">
+        <mat-icon>paid</mat-icon> Calcular Benefício
+      </button>
+    </div>
+  </form>
+
+  <mat-spinner *ngIf="isLoading$ | async; else notLoading" style="margin:0 auto;"></mat-spinner>
+
+  <ng-template #notLoading>
+    <div class="table-container mat-elevation-z8" *ngIf="!(loading$ | async) && !(error$ | async) && !!aportes">
+      <mat-table #table [dataSource]="dataSource" class="table-result">
+
+        <ng-container matColumnDef="cpf">
+          <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.cpf }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="aporte">
+          <mat-header-cell *matHeaderCellDef>Aporte</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.aporte }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" #matrow>
+        </mat-row>
+      </mat-table>
+    </div>
+  </ng-template>

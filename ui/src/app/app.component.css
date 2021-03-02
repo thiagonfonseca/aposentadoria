@@ -1,0 +1,25 @@
+.tb-spacer {
+  flex: 1 1 auto;
+}
+
+.tb-icon {
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    padding: 16px;
+    display: block;
+    width: 100%;
+}

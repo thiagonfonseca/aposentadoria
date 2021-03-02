@@ -1,0 +1,26 @@
+.form-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.full-input {
+  width: 50%;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.table-result {
+  flex: 1;
+  overflow: auto;
+}
+
+.table-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

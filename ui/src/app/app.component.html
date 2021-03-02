@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <span>Análise de Aposentadoria</span>
+  <span class="tb-spacer"></span>
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="/beneficiarios" routerLinkActive>
+      Cadastro de Beneficiários
+    </a>
+    <a mat-tab-link routerLink="/caixa" routerLinkActive>
+      Caixa Eletrônico
+    </a>
+  </nav>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

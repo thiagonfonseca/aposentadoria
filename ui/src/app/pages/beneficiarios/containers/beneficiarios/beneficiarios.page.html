@@ -1,0 +1,74 @@
+<mat-spinner *ngIf="isLoading$ | async; else beneficiarioList" style="margin:0 auto;"></mat-spinner>
+<ng-template #beneficiarioList>
+  <div class="form-container">
+    <form [formGroup]="form" novalidate>
+        <mat-form-field class="full-input" style="margin-right: 10px">
+            <input matInput placeholder="Nome do Beneficiário" formControlName="nome">
+        </mat-form-field>
+        <mat-form-field style="width:30%;margin-right: 10px">
+            <input matInput placeholder="CPF (Somente números)" formControlName="cpf">
+        </mat-form-field>
+        <mat-form-field class="full-input" style="margin-right: 10px">
+            <input matInput placeholder="E-mail do Beneficiário" formControlName="email">
+        </mat-form-field>
+        <mat-form-field style="width:30%;margin-right: 10px">
+            <input matInput placeholder="Saldo da Aposentadoria" formControlName="saldo" type="number" step="0.01">
+        </mat-form-field>
+        <mat-form-field style="width:30%;margin-right: 10px">
+            <input matInput placeholder="Anos para aposentadoria" formControlName="anos" type="number" step="1">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="saveBeneficiario()" name="action" style="margin-right: 10px">
+          <mat-icon>save</mat-icon> {{editing === false ? 'Cadastrar' : 'Alterar'}}
+        </button>
+        <button mat-raised-button color="primary" name="limpar" (click)="cancel()">
+            <mat-icon>delete</mat-icon> Limpar
+        </button>
+    </form>
+  </div>
+
+  <div class="table-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource" class="table-result">
+
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.nome }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cpf">
+          <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.cpf }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.email }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="saldo">
+          <mat-header-cell *matHeaderCellDef>Saldo (Aposentadoria)</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.saldo }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="anos">
+          <mat-header-cell *matHeaderCellDef>Anos p/ Aposentadoria</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.anos }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="editBeneficiario(row)">
+                  <mat-icon>mode</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteBeneficiario(row.id)">
+                  <mat-icon>delete</mat-icon>
+              </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" #matrow>
+        </mat-row>
+      </mat-table>
+  </div>
+</ng-template>
